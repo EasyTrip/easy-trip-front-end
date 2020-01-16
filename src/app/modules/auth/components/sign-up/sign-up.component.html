@@ -1,0 +1,68 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Sign up</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="signUp()" #f="ngForm">
+        <mat-form-field>
+          <input id="email"
+                 type="email"
+                 placeholder="E-mail address"
+                 required
+                 name='email'
+                 [(ngModel)]="signUpUser.email"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="first_name"
+                 placeholder="First Name"
+                 required
+                 name='first_name'
+                 [(ngModel)]="signUpUser.first_name"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="last_name"
+                 placeholder="Last Name"
+                 required
+                 name='last_name'
+                 [(ngModel)]="signUpUser.last_name"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="password"
+                 type="password"
+                 placeholder="Password"
+                 required
+                 name='password'
+                 [(ngModel)]="signUpUser.password"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="password_confirmation"
+                 type="password"
+                 placeholder="Password confirmation"
+                 required
+                 name='password_confirmation'
+                 [(ngModel)]="signUpUser.password_confirmation"
+                 matInput>
+        </mat-form-field>
+
+        <div class="button">
+          <button type="submit"
+                  [disabled]="!(f.valid)"
+                  [ngClass]="{'disabled': !(f.valid)}"
+                  mat-button>
+            Sign up
+          </button>
+        </div>
+      </form>
+      <div *ngIf="errors.length">
+        <div *ngFor="let error of errors">{{error}}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

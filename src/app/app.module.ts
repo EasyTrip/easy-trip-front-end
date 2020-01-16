@@ -7,6 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToolbarModule } from "./modules/toolbar/toolbar.module";
+import { AuthModule } from "./modules/auth/auth.module";
+import { AuthService } from "./modules/auth/auth.service";
+import { AuthGuard } from "./modules/auth/auth.guard";
+import { ApiService } from "./api.service";
 
 @NgModule({
   declarations: [
@@ -18,9 +22,11 @@ import { ToolbarModule } from "./modules/toolbar/toolbar.module";
     BrowserAnimationsModule,
     GraphQLModule,
     HttpClientModule,
-    ToolbarModule
+    ToolbarModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard, ApiService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

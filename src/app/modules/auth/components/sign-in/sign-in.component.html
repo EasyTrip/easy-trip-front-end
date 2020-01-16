@@ -1,0 +1,40 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="signIn()" #f="ngForm">
+        <mat-form-field>
+          <input id="email"
+                 type="email"
+                 placeholder="E-mail address"
+                 required
+                 name='email'
+                 [(ngModel)]="signInUser.email"
+                 matInput>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input id="password"
+                 type="password"
+                 placeholder="Password"
+                 required
+                 name='password'
+                 [(ngModel)]="signInUser.password"
+                 matInput>
+        </mat-form-field>
+
+        <div class="button">
+          <button type="submit"
+                  [disabled]="!(f.valid)"
+                  [ngClass]="{'disabled': !(f.valid)}"
+                  mat-button>
+            Login
+          </button>
+        </div>
+      </form>
+      <div *ngIf="errors.length">
+        <div *ngFor="let error of errors">{{error}}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
