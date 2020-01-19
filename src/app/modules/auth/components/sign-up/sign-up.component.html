@@ -51,6 +51,10 @@
                  matInput>
         </mat-form-field>
 
+        <div class="mat-error" *ngIf="errors.length">
+          <div *ngFor="let error of errors">{{error}}</div>
+        </div>
+
         <div class="button">
           <button type="submit"
                   [disabled]="!(f.valid)"
@@ -60,9 +64,6 @@
           </button>
         </div>
       </form>
-      <div *ngIf="errors.length">
-        <div *ngFor="let error of errors">{{error}}</div>
-      </div>
     </mat-card-content>
   </mat-card>
 </div>

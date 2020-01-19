@@ -10,7 +10,6 @@ import { ToolbarModule } from "./modules/toolbar/toolbar.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { AuthGuard } from "./modules/auth/auth.guard";
-import { ApiService } from "./api.service";
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import { ApiService } from "./api.service";
     ToolbarModule,
     AuthModule
   ],
-  providers: [AuthService, AuthGuard, ApiService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

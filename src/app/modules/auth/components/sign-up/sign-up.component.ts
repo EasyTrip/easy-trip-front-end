@@ -28,27 +28,17 @@ export class SignUpComponent implements OnInit {
   signUp() {
     if (this.signUpUser.email && this.signUpUser.first_name && this.signUpUser.last_name &&
       this.signUpUser.password && this.signUpUser.password_confirmation) {
-      this.authService.signup(this.signUpUser.email, this.signUpUser.first_name, this.signUpUser.last_name,
+      this.authService.signUp(this.signUpUser.email, this.signUpUser.first_name, this.signUpUser.last_name,
         this.signUpUser.password, this.signUpUser.password_confirmation)
         .subscribe(
-          () => {
-            this.authService.login(this.signUpUser.email, this.signUpUser.password)
-              .subscribe(
-                () => this.router.navigateByUrl('/home')
-              );
-          },
           (res) => {
-            this.errors = [];
-            const errors = res.error.errors;
-            for (const key of Object.keys(errors)) {
-              this.errors.push(this.capitalizeFirstLetter(key) + ' ' + errors[key]);
-            }
+            this.authService.signIn(res.data.emailSignUp.email, this.signUpUser.password)
+              .subscribe(() => this.router.navigateByUrl('/'));
+          },
+          (error) => {
+            this.errors = [error.networkError.error.error.message];
           }
         );
     }
-  }
-
-  private capitalizeFirstLetter(str: string): string {
-    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 }

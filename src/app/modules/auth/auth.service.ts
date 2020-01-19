@@ -1,40 +1,80 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import {Router} from '@angular/router';
-import { ApiService } from "../../api.service";
+import { Router } from '@angular/router';
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+import { shareReplay, tap } from "rxjs/operators";
+
+const signUpQuery = gql`
+  mutation emailSignUp(
+    $email: String!,
+    $firstName: String!,
+    $lastName: String!,
+    $password: String!,
+    $passwordConfirmation: String!
+  ) {
+    emailSignUp(
+      email: $email,
+      firstName: $firstName,
+      lastName: $lastName,
+      password: $password,
+      passwordConfirmation: $passwordConfirmation
+    ) {
+      email
+    }
+  }
+`;
+const signInQuery = gql`
+  mutation emailSignIn($email: String!, $password: String!) {
+    emailSignIn(email: $email, password: $password) {
+      authToken
+    }
+  }
+`;
 
 @Injectable()
 export class AuthService {
   private token: string;
 
-  constructor(private api: ApiService, private router: Router) {
-
+  constructor(private router: Router, private apollo: Apollo) {
   }
 
-  public signup(email: string, first_name: string, last_name: string, password: string, password_confirmation: string): Observable<any> {
-    const body = {
-      user: {
+  public signUp(
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+    passwordConfirmation: string
+  ): Observable<any> {
+    return this.apollo.mutate({
+      mutation: signUpQuery,
+      variables: {
         email: email,
-        first_name: first_name,
-        last_name: last_name,
+        firstName: firstName,
+        lastName: lastName,
         password: password,
-        password_confirmation: password_confirmation
+        passwordConfirmation: passwordConfirmation
       }
-    };
-    return this.api.post('/users', body);
+    });
   }
 
-  public login(email: string, password: string): Observable<any> {
-    return new Observable<any>();
+  public signIn(email: string, password: string): Observable<any> {
+    return this.apollo.mutate({
+      mutation: signInQuery,
+      variables: { email: email, password: password }
+    }).pipe(
+      tap(res => this.saveToken(res)),
+      shareReplay()
+    );
   }
 
-  public logout(): void {
+  public signOut(): void {
     localStorage.removeItem('access_token');
     this.token = '';
     this.router.navigateByUrl('/sign-in');
   }
 
-  public isLoggedIn(): boolean {
+  public isSignedIn(): boolean {
     const user = this.getUserDetails();
     if (user) {
       return user.exp > Date.now() / 1000;
@@ -63,7 +103,7 @@ export class AuthService {
   }
 
   private saveToken(authResult): void {
-    localStorage.setItem('access_token', authResult.auth_token);
+    localStorage.setItem('access_token', authResult.data.emailSignIn.authToken);
     this.token = authResult.auth_token;
   }
 }
