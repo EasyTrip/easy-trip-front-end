@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
+import { Trip } from "../../../../core/models/trip";
 
 @Component({
   selector: 'dashboard',
@@ -9,11 +10,13 @@ import gql from "graphql-tag";
 })
 
 export class DashboardComponent implements OnInit {
-  trips: Array<String>;
+  trips: Array<Trip>;
+
   private loadTripsQuery = gql`
     query getTrips {
       currentUser {
         trips {
+          id
           name
         }
       }
@@ -31,7 +34,7 @@ export class DashboardComponent implements OnInit {
     this.apollo.watchQuery<any>({ query: this.loadTripsQuery })
       .valueChanges
       .subscribe(res => {
-        this.trips = res.data.currentUser.trips.map(trip => trip.name);
+        this.trips = res.data.currentUser.trips.map(trip => new Trip(trip));
       })
   }
 }

@@ -11,6 +11,7 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { AuthGuard } from "./modules/auth/auth.guard";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
+import { TripModule } from "./modules/trip/trip.module";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DashboardModule } from "./modules/dashboard/dashboard.module";
     HttpClientModule,
     ToolbarModule,
     AuthModule,
-    DashboardModule
+    DashboardModule,
+    TripModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
