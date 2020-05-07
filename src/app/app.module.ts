@@ -10,6 +10,7 @@ import { ToolbarModule } from "./modules/toolbar/toolbar.module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { AuthService } from "./modules/auth/auth.service";
 import { AuthGuard } from "./modules/auth/auth.guard";
+import { DashboardModule } from "./modules/dashboard/dashboard.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthGuard } from "./modules/auth/auth.guard";
     GraphQLModule,
     HttpClientModule,
     ToolbarModule,
-    AuthModule
+    AuthModule,
+    DashboardModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

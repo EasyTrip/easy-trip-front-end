@@ -22,7 +22,7 @@ import { MatCardModule } from "@angular/material/card";
   ],
   providers: [AuthLoginGuard],
   declarations: [SignInComponent, SignUpComponent],
-  exports: [SignInComponent, AuthRoutingModule]
+  exports: [AuthRoutingModule]
 })
 export class AuthModule {
 }

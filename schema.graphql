@@ -12,7 +12,6 @@ type ArtificialUser {
   createdAt: ISO8601DateTime!
   creator: [User!]!
   firstName: String!
-  fullName: String!
   id: ID!
   lastName: String!
   updatedAt: ISO8601DateTime!
@@ -91,7 +90,6 @@ type User {
   currentSignInAt: ISO8601DateTime
   email: String!
   firstName: String!
-  fullName: String!
   id: ID!
   lastName: String!
   lastSignInAt: ISO8601DateTime

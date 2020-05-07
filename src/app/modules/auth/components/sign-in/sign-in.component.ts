@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
-import { Apollo } from "apollo-angular";
-import gql from 'graphql-tag';
 
 @Component({
   selector: 'app-login',
@@ -18,32 +16,18 @@ export class SignInComponent implements OnInit {
   errors = [];
 
   constructor(private authService: AuthService,
-              private router: Router,
-              private apollo: Apollo) {
+              private router: Router) {
   }
 
   ngOnInit() {
   }
 
   signIn() {
-    this.apollo.watchQuery({
-      query: gql`
-          {
-            currentUser {
-              firstName
-              lastName
-            }
-          }
-        `
-    })
-      .valueChanges.subscribe(result => {
-      console.log(result);
-    });
     if (this.signInUser.email && this.signInUser.password) {
       this.authService.signIn(this.signInUser.email, this.signInUser.password)
         .subscribe(
           () => {
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/dashboard');
           },
           (res) => {
             this.errors = [];
