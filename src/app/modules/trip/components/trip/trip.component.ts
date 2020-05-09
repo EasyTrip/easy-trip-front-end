@@ -4,6 +4,18 @@ import { Trip } from "../../../../core/models/trip";
 import gql from "graphql-tag";
 import { Apollo } from "apollo-angular";
 
+const tripQuery = gql`
+  query getTrip($id: ID!) {
+    trip(id: $id){
+      id
+      name
+      description
+      startDate
+      finishDate
+    }
+  }
+`
+
 @Component({
   selector: 'app-trip',
   templateUrl: './trip.component.html',
@@ -13,16 +25,6 @@ import { Apollo } from "apollo-angular";
 export class TripComponent implements OnInit {
   trip: Trip;
 
-  private tripQuery = gql`
-    query getTrip($id: ID!) {
-      trip(id: $id){
-        id
-        name
-        startDate
-        finishDate
-      }
-    }
-  `
   constructor(private route: ActivatedRoute, private apollo: Apollo) {
   }
 
@@ -34,7 +36,7 @@ export class TripComponent implements OnInit {
 
   private loadTrip(id: String) {
     this.apollo.watchQuery<any>({
-      query: this.tripQuery,
+      query: tripQuery,
       variables: {id: id}
     })
       .valueChanges

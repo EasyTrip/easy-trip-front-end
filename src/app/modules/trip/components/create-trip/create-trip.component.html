@@ -1,0 +1,43 @@
+<form (ngSubmit)="createTrip()" #f="ngForm">
+  <mat-form-field>
+    <input id="name"
+           type="text"
+           placeholder="Trip name"
+           required
+           name="name"
+           [(ngModel)]="trip.name"
+           matInput>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea id="description"
+              type="text"
+              placeholder="Description"
+              name="description"
+              [(ngModel)]="trip.description"
+              matInput></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Start date</mat-label>
+    <input matInput [matDatepicker]="startDate" name="startDate" [(ngModel)]="trip.startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Finish date</mat-label>
+    <input matInput [matDatepicker]="finishDate" name="finishDate" [(ngModel)]="trip.finishDate">
+    <mat-datepicker-toggle matSuffix [for]="finishDate"></mat-datepicker-toggle>
+    <mat-datepicker #finishDate></mat-datepicker>
+  </mat-form-field>
+
+  <div class="button">
+    <button type="submit"
+            [disabled]="!(f.valid)"
+            [ngClass]="{'disabled': !(f.valid)}"
+            mat-button>
+      Create
+    </button>
+  </div>
+</form>
