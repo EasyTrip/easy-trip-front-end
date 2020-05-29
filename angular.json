@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "easy-trip-front-end"
+  "defaultProject": "easy-trip-front-end",
+  "cli": {
+    "analytics": false
+  }
 }
