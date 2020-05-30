@@ -1,0 +1,52 @@
+<form autocomplete="off" (ngSubmit)="createExpense()" #f="ngForm">
+  <mat-form-field>
+    <input id="name"
+           type="text"
+           placeholder="Expense name"
+           required
+           name="name"
+           [(ngModel)]="expense.name"
+           matInput>
+  </mat-form-field>
+
+  <div>
+    <mat-form-field class="form-price">
+      <input id="price"
+             type="number"
+             placeholder="Price"
+             required
+             name="price"
+             [(ngModel)]="expense.price"
+             matInput>
+    </mat-form-field>
+
+    <mat-form-field class="form-price-currency">
+      <mat-select
+        id="priceCurrency"
+        name="priceCurrency"
+        [(ngModel)]="expense.priceCurrency">
+        <mat-option *ngFor="let currency of currencies" [value]="currency">
+          {{currency}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <textarea id="description"
+              type="text"
+              placeholder="Description"
+              name="description"
+              [(ngModel)]="expense.description"
+              matInput></textarea>
+  </mat-form-field>
+
+  <div class="button">
+    <button type="submit"
+            [disabled]="!(f.valid)"
+            [ngClass]="{'disabled': !(f.valid)}"
+            mat-button>
+      Create
+    </button>
+  </div>
+</form>

@@ -1,8 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <a [routerLink]="['dashboard']" mat-flat-button color="primary">Home</a>
-    <a [routerLink]="['sign-in']" mat-flat-button color="primary">Sign in</a>
-    <a [routerLink]="['sign-up']" mat-flat-button color="primary">Sign up</a>
-    <a (click)="signOut()" mat-flat-button color="primary">Sign out</a>
+    <div class="flex-spacer"></div>
+    <a *ngIf="!isSignedIn()" [routerLink]="['sign-in']" mat-flat-button color="primary">Sign in</a>
+    <a *ngIf="!isSignedIn()" [routerLink]="['sign-up']" mat-flat-button color="primary">Sign up</a>
+    <a *ngIf="isSignedIn()" (click)="signOut()" mat-flat-button color="primary">Sign out</a>
   </mat-toolbar-row>
 </mat-toolbar>

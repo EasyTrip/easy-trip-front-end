@@ -10,10 +10,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../core/format-datapickers';
+import { CreateExpenseComponent } from './components/create-expense/create-expense.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
-  declarations: [TripComponent, CreateTripComponent],
+  declarations: [TripComponent, CreateTripComponent, CreateExpenseComponent],
   imports: [
     CommonModule,
     TripRoutingModule,
@@ -22,7 +24,8 @@ import { APP_DATE_FORMATS, AppDateAdapter } from '../../core/format-datapickers'
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
