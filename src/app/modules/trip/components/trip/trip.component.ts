@@ -14,7 +14,7 @@ const tripQuery = gql`
       finishDate
     }
   }
-`
+`;
 
 @Component({
   selector: 'app-trip',
@@ -42,6 +42,6 @@ export class TripComponent implements OnInit {
       .valueChanges
       .subscribe(res => {
         this.trip = new Trip(res.data.trip);
-      })
+      });
   }
 }

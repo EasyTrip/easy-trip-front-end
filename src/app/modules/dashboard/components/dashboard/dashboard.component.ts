@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
         }
       }
     }
-  `
+  `;
 
   constructor(private apollo: Apollo) {
   }
@@ -35,6 +35,6 @@ export class DashboardComponent implements OnInit {
       .valueChanges
       .subscribe(res => {
         this.trips = res.data.currentUser.trips.map(trip => new Trip(trip));
-      })
+      });
   }
 }
