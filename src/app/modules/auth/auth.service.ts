@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
-import { shareReplay, tap } from "rxjs/operators";
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { shareReplay, tap } from 'rxjs/operators';
 
 const signUpQuery = gql`
   mutation emailSignUp(
@@ -49,11 +49,11 @@ export class AuthService {
     return this.apollo.mutate({
       mutation: signUpQuery,
       variables: {
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        password: password,
-        passwordConfirmation: passwordConfirmation
+        email,
+        firstName,
+        lastName,
+        password,
+        passwordConfirmation
       }
     });
   }
@@ -61,7 +61,7 @@ export class AuthService {
   public signIn(email: string, password: string): Observable<any> {
     return this.apollo.mutate({
       mutation: signInQuery,
-      variables: { email: email, password: password }
+      variables: { email, password }
     }).pipe(
       tap(res => this.saveToken(res)),
       shareReplay()

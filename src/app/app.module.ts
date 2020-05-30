@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ToolbarModule } from "./modules/toolbar/toolbar.module";
-import { AuthModule } from "./modules/auth/auth.module";
-import { AuthService } from "./modules/auth/auth.service";
-import { AuthGuard } from "./modules/auth/auth.guard";
-import { DashboardModule } from "./modules/dashboard/dashboard.module";
-import { TripModule } from "./modules/trip/trip.module";
+import { ToolbarModule } from './modules/toolbar/toolbar.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AuthService } from './modules/auth/auth.service';
+import { AuthGuard } from './modules/auth/auth.guard';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { TripModule } from './modules/trip/trip.module';
 
 @NgModule({
   declarations: [

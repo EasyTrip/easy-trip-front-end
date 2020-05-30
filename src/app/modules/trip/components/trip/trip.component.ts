@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Trip } from "../../../../core/models/trip";
-import gql from "graphql-tag";
-import { Apollo } from "apollo-angular";
+import { ActivatedRoute } from '@angular/router';
+import { Trip } from '../../../../core/models/trip';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
 
 const tripQuery = gql`
   query getTrip($id: ID!) {
@@ -30,14 +30,14 @@ export class TripComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.loadTrip(params['id']);
+      this.loadTrip(params.id);
     });
   }
 
-  private loadTrip(id: String) {
+  private loadTrip(id: string) {
     this.apollo.watchQuery<any>({
       query: tripQuery,
-      variables: {id: id}
+      variables: {id}
     })
       .valueChanges
       .subscribe(res => {

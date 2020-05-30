@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Trip } from "../../../../core/models/trip";
-import gql from "graphql-tag";
-import { Apollo } from "apollo-angular";
-import { Router } from "@angular/router";
+import { Trip } from '../../../../core/models/trip';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { Router } from '@angular/router';
 
 const createTripMutation = gql`
   mutation createTrip($name: String!, $description: String, $startDate: ISO8601DateTime, $finishDate: ISO8601DateTime) {
