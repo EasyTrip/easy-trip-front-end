@@ -1,0 +1,13 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let expense of expenses">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{expense.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{expense.price}} {{expense.priceCurrency}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{expense.description}}</p>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Trip } from '../../../../core/models/trip';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { Expense } from '../../../../core/models/expense';
 
 const tripQuery = gql`
   query getTrip($id: ID!) {
@@ -12,6 +13,13 @@ const tripQuery = gql`
       description
       startDate
       finishDate
+      expenses {
+        id
+        name
+        description
+        price
+        priceCurrency
+      }
     }
   }
 `;
@@ -24,24 +32,26 @@ const tripQuery = gql`
 
 export class TripComponent implements OnInit {
   trip: Trip;
+  expenses: Expense[];
 
   constructor(private route: ActivatedRoute, private apollo: Apollo) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.loadTrip(params.id);
+      this.loadData(params.id);
     });
   }
 
-  private loadTrip(id: string) {
+  private loadData(tripId: string) {
     this.apollo.watchQuery<any>({
       query: tripQuery,
-      variables: {id}
+      variables: {id: tripId}
     })
       .valueChanges
       .subscribe(res => {
         this.trip = new Trip(res.data.trip);
+        this.expenses = res.data.trip.expenses.map(exp => new Expense(exp));
       });
   }
 }

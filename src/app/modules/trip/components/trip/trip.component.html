@@ -1,7 +1,10 @@
-<h1 contenteditable="true">{{trip?.name}}</h1>
+<h1 class="header" contenteditable="true">{{trip?.name}}</h1>
 
 
 <h2>{{trip?.startDate?.toDateString()}}</h2>
 <h2>{{trip?.finishDate?.toDateString()}}</h2>
 
-<app-create-expense [trip]="trip"></app-create-expense>
+<div class="page">
+  <app-create-expense [trip]="trip"></app-create-expense>
+  <app-expense-list [expenses]="expenses"></app-expense-list>
+</div>
