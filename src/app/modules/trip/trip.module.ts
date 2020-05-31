@@ -12,9 +12,10 @@ import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/mat
 import { APP_DATE_FORMATS, AppDateAdapter } from '../../core/format-datapickers';
 import { CreateExpenseComponent } from './components/create-expense/create-expense.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ExpenseListComponent } from './components/trip-list/expense-list.component';
+import { ExpenseListComponent } from './components/expense-list/expense-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { ExpenseService } from './expense.service';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatCardModule } from '@angular/material/card';
     MatCardModule,
   ],
   providers: [
+    ExpenseService,
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
   ]
