@@ -1,5 +1,7 @@
 <mat-card>
-  <form autocomplete="off" (ngSubmit)="createExpense()" #f="ngForm">
+  <form autocomplete="off"
+        #form="ngForm"
+        (ngSubmit)="createExpense(form)">
     <mat-form-field>
       <input id="name"
              type="text"
@@ -44,8 +46,8 @@
 
     <div class="button">
       <button type="submit"
-              [disabled]="!(f.valid)"
-              [ngClass]="{'disabled': !(f.valid)}"
+              [disabled]="!(form.valid)"
+              [ngClass]="{'disabled': !(form.valid)}"
               mat-button>
         Create
       </button>

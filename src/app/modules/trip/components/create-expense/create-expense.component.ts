@@ -3,6 +3,7 @@ import { Expense } from '../../../../core/models/expense';
 import { Apollo } from 'apollo-angular';
 import { Trip } from '../../../../core/models/trip';
 import { ExpenseService } from '../../expense.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-expense',
@@ -22,7 +23,8 @@ export class CreateExpenseComponent implements OnInit {
     this.expense.priceCurrency = this.currencies[0];
   }
 
-  public createExpense() {
+  public createExpense(form: NgForm) {
     this.expenseService.createExpense(this.trip, this.expense);
+    form.resetForm();
   }
 }
