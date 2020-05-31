@@ -1,8 +1,9 @@
-<h1 class="header" contenteditable="true">{{trip?.name}}</h1>
-
-
-<h2>{{trip?.startDate?.toDateString()}}</h2>
-<h2>{{trip?.finishDate?.toDateString()}}</h2>
+<h1 class="header" contenteditable="true">
+  {{trip?.name}}
+  <span *ngIf="trip?.startDate || trip?.finishDate">
+    ({{trip?.startDate?.toDateString() || 'Undefined'}} - {{trip?.finishDate?.toDateString() || 'Undefined'}})
+  </span>
+</h1>
 
 <div class="page">
   <app-create-expense [trip]="trip"></app-create-expense>
